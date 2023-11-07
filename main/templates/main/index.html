@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Главная{% endblock %}
+{% block styles %}
+
+{% endblock %}
+{% block content %}
+
+{% if is_mobile %}
+Наш сайт на мобильной версии не работает
+{% else %}
+<div class="div1">
+	<img class="img1" src="{% static 'main/image/dgtu.png' %}" alt="" >
+</div>
+<br>
+
+<div class="div1">
+	<h2>Мы рады приветствовать вас в <br>
+	   нашей инновационной <br>
+	   образовательной среде,где знания <br> 
+	  становятся доступными,<br>
+	  увлекательными и интегрированными.
+	  <br> 
+	  <br>
+	  <b class="b">"ДГТУ ЗнанияHub"</b>- это не просто <br>
+	  образовательная платформа, это место, <br>
+	  где вы можете расширить свой кругозор, <br>
+		обучиться новым навыкам <br>
+	  и встретить единомышленников.</h2>
+  </div> 
+  <br>  
+  <footer>
+	<p>&copy; ДГТУ ЗнанияHub</p>
+</footer>
+{% endif %}
+{% endblock %}

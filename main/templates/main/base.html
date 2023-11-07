@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
+	<title>{% block title %}{% endblock %}</title>
+	{% block styles %}{% endblock %}
+</head>
+<body>
+	<div class="menu">
+		<div class="title"><h3>ДГТУ ЗнанияHub</h3></div>
+		<div class="list_menu">
+			<ul>
+				<li><a href="https://edu.donstu.ru/">ДГТУ</a></li>
+				<li><a href="{% url 'home' %}">Учеба</a></li>
+				<li><a href="https://do.skif.donstu.ru/">Скиф</a></li>
+				<li><a href="{% url 'contacts' %}">Контакты</a></li>
+				{% if user.is_authenticated %}
+				<li><a href="{% url 'logout' %}">Выйти</a></li>
+				Вы авторизованы как - {{user.username}}
+				{% else %}
+				<li><a href="{% url 'login' %}">Войти</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+    {% block content %}{% endblock %}
+</body>
+</html>

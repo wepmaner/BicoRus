@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма для отправки файла</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .file-upload {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .file-upload input[type="file"] {
+            display: none;
+        }
+
+        #file-name {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="file-upload" id="file-upload">
+        <label for="file-input">Перетащите файл сюда или кликните для выбора</label>
+        <input type="file" id="file-input">
+        <p id="file-name"></p>
+    </div>
+
+    <button id="submit-button">Отправить файл</button>
+
+    <script>
+        const fileUpload = document.getElementById('file-upload');
+        const fileInput = document.getElementById('file-input');
+        const fileName = document.getElementById('file-name');
+        const submitButton = document.getElementById('submit-button');
+
+        let selectedFile = null;
+
+        fileUpload.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fileUpload.style.border = '2px dashed #999';
+        });
+
+        fileUpload.addEventListener('dragleave', () => {
+            fileUpload.style.border = '2px dashed #ccc';
+        });
+
+        fileUpload.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fileUpload.style.border = '2px dashed #ccc';
+            selectedFile = e.dataTransfer.files[0];
+            updateFileName(selectedFile);
+        });
+
+        fileInput.addEventListener('change', () => {
+            selectedFile = fileInput.files[0];
+            updateFileName(selectedFile);
+        });
+
+        submitButton.addEventListener('click', () => {
+            if (selectedFile) {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+
+                // Здесь вы можете отправить formData на сервер с использованием AJAX или другого метода отправки данных
+                // Пример отправки с использованием Fetch API:
+                fetch('серверный_урл_обработки_загрузки', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => {
+                    // Обработка ответа от сервера
+                })
+                .catch(error => {
+                    // Обработка ошибки
+                });
+            }
+        });
+
+        function updateFileName(file) {
+            if (file) {
+                fileName.textContent = `Выбранный файл: ${file.name}`;
+            } else {
+                fileName.textContent = '';
+            }
+        }
+    </script>
+</body>
+</html>

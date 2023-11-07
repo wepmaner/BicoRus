@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Настройки{% endblock %}
+
+{% block content %}
+{% if success%}
+Второй фактор успешно добавлен
+{% else %}
+Отстканируйте qrcode 
+<image src="{{ otp.file_url }}"></image>
+<form method="post">
+Введите код с приложения:
+{{ form.Code }}
+{% csrf_token %}
+<button>Подтвердить</button>
+{{ form.non_field_errors}}
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,71 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Регистрация{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login_main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login_util.css' %}">
+{% endblock %}
+
+{% block content %}
+<body>
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form", method="POST">
+					{% csrf_token %}
+					<span class="login100-form-title p-b-26">
+						Создание аккаунта
+					</span>
+					<span class="login100-form-title p-b-48">
+						<i class="zmdi zmdi-font"></i>
+					</span>
+
+					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
+						{{form.Login}}
+						<span class="focus-input100" data-placeholder="Логин"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						{{form.Password}}
+						<span class="focus-input100" data-placeholder="Пароль"></span>
+					</div>
+                    <div class="wrap-input100 validate-input" data-validate="Enter password">
+						<span class="btn-show-pass">
+							<i class="zmdi zmdi-eye"></i>
+						</span>
+						{{form.ConfirmPassword}}
+						<span class="focus-input100" data-placeholder="Пароль"></span>
+					</div>
+					{{ form.non_field_errors}}
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button class="login100-form-btn">
+								Зарегистрироваться
+							</button>
+						</div>
+					</div>
+
+					<div class="text-center p-t-115">
+						<span class="txt1">
+							Уже есть аккаунт?
+						</span>
+
+						<a class="txt2" href="{% url 'login' %}">
+							Войти
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	
+
+	<div id="dropDownSelect1"></div>
+{% endblock %}

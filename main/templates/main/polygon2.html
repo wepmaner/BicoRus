@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+
+{% block title %}Тесты2{% endblock %}
+{% block styles %}
+<script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"></script>
+{% endblock %}
+{% block content %}
+<body>
+    <script>
+    const csrftoken = Cookies.get('csrftoken');
+    function sendRequest() {
+        
+    var formData = new FormData();
+    formData.append('Code', 656578);
+    console.log(formData);
+    const request = new Request(
+        '/polygon2',
+        {
+            method: 'POST',
+            headers: {'X-CSRFToken': csrftoken},
+            mode: 'same-origin', // Do not send CSRF token to another domain.
+            body: formData,
+            
+        }
+    );
+    fetch(request)
+    .then(function(response) {
+        console.log('oke')
+    })
+    .catch(function(error) {
+        console.error("Ошибка при выполнении запроса:", error);
+    });
+    }
+    setInterval(sendRequest,5000)
+    </script>
+</body>
+{% endblock %}

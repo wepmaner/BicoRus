@@ -1,0 +1,5 @@
+sudo systemctl enable learnhub.gunicorn
+sudo systemctl start learnhub.gunicorn
+sudo systemctl status learnhub.gunicorn
+
+sudo ln -s /etc/nginx/sites-available/learnhub /etc/nginx/sites-enabled/learnhub

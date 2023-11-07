@@ -1,0 +1,58 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}Тесты{% endblock %}
+{% block styles %}
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login_main.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'main/css/login_util.css' %}">
+{% endblock %}
+
+	
+
+{% block content %}
+<style>
+	body {
+		font-family: Arial, sans-serif;
+	}
+	
+	.file-list {
+		list-style: none;
+		padding: 0;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.file-item {
+		width: 150px;
+		height: 150px;
+		border: 1px solid #ddd;
+		margin: 10px;
+		text-align: center;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.file-link {
+		text-decoration: none;
+		color: #333;
+		font-weight: bold;
+	}
+</style>
+<body>
+	<form method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit">Загрузить</button>
+	  </form>
+	{% for obj in documents %}
+    <ul class="file-list">
+        <li class="file-item">
+            <a class="file-link" href="{{ obj.document.url }}" download>{{ obj.name }}</a>
+        </li>
+    </ul>
+	{% endfor %}
+	
+</body>
+{% endblock %}

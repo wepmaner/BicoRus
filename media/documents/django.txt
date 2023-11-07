@@ -1,0 +1,7 @@
+python manage.py makemigrations
+python manage.py migrate
+
+Пересоздать миграции
+python manage.py migrate [name_app] zero --fake
+python manage.py makemigrations [name_app]
+python manage.py migrate [name_app]--fake
